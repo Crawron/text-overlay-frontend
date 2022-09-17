@@ -26,10 +26,21 @@ export function commitMessage() {
 	const current = getCurrentMessage().text
 	if (!current.trim()) return
 
+	speakMessage(current)
+
 	messageHistory.set([
 		...messageHistory.get(),
 		{ key: crypto.randomUUID(), text: "" },
 	])
+}
+
+function speakMessage(text: string) {
+	const toPronounce = text
+		.toLowerCase()
+		.replace(/\bidk\b/g, "i don't know")
+		.replace(/\b'\b/g, "") // the way the tts voice pronounces words like "that's", "what's" or "it's" is weird
+
+	speechSynthesis.speak(new SpeechSynthesisUtterance(toPronounce))
 }
 
 export function backspaceMessage() {
