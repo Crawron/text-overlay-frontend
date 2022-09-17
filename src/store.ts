@@ -23,6 +23,9 @@ export function typeInMessage(text: string) {
 }
 
 export function commitMessage() {
+	const current = getCurrentMessage().text
+	if (!current.trim()) return
+
 	messageHistory.set([
 		...messageHistory.get(),
 		{ key: crypto.randomUUID(), text: "" },
