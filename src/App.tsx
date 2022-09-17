@@ -28,16 +28,20 @@ function App() {
 }
 
 function Bubble({ content, active }: { content: string; active?: boolean }) {
+	const textStyle = active
+		? "animate-pulse text-white/70"
+		: "text-white transition-colors"
+
 	return (
 		<motion.div
 			layout="preserve-aspect"
-			className="max-w-full w-fit leading-none bg-black/70 rounded-lg text-white py-3 px-4 backdrop-blur-lg text-4xl font-medium break-words"
+			className="max-w-full w-fit leading-none  bg-black/80 rounded-lg py-3 px-4 backdrop-blur-lg text-4xl font-medium break-words"
 			style={{ wordBreak: "break-word" }}
 			initial={{ opacity: 0, y: 20 }}
 			animate={{ opacity: 1, y: 0 }}
 			exit={{ opacity: 0, y: 20 }}
 		>
-			{content}
+			<span className={textStyle}>{content}</span>
 			{active && <span className="animate-pulse text-white/50"> _</span>}
 		</motion.div>
 	)
